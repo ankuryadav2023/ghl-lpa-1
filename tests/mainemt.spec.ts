@@ -8,9 +8,10 @@ test.describe("makemytrip.com Flight Booking Automation", async ()=>{
     let fromCityName: string="Jaipur";
     let toCityName: string="Delhi";
 
-    test.beforeEach(async ({browser})=>{
-        page=await browser.newPage();
-        await page.goto("https://www.easemytrip.com/?utm_campaign=788997081&utm_source=g_c&utm_medium=cpc&utm_term=e_easemytrip&adgroupid=39319940377&gad_source=1&gbraid=0AAAAADo_0-i2b-rmCwTS7fpcWR_bC8VFX");
+    test.beforeAll(async ({browser})=>{
+        const context=await browser.newContext();
+        page=await context.newPage();
+        await page.goto("https://www.easemytrip.com");
     });
 
     test("Book Flight with Lowest Ticket Price and Nearest Date", async ()=>{
@@ -23,5 +24,6 @@ test.describe("makemytrip.com Flight Booking Automation", async ()=>{
         await searchFlightsPageObj.bookCheapestFlight();
         let flightDetailsPageObj=new FlightDetailsPage(page);
         await flightDetailsPageObj.validateFair();
+        await flightDetailsPageObj.validateCoupon("ABCD", "EMTNCF");
     });
 });
