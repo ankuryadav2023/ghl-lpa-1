@@ -35,7 +35,6 @@ export class FlightsPage{
             }
         }
         await this.page.waitForTimeout(1000);
-        // await this.page.locator(this.toCityLocator2).nth(0).click();
     }
 
     async selectLowestPriceTicketInDec(){

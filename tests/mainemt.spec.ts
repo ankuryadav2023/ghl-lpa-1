@@ -7,6 +7,8 @@ test.describe("makemytrip.com Flight Booking Automation", async ()=>{
     let page: Page;
     let fromCityName: string="Jaipur";
     let toCityName: string="Delhi";
+    let invalidCouponCode: string="ABCD";
+    let validCouponCode: string="EMTNCF";
 
     test.beforeAll(async ({browser})=>{
         const context=await browser.newContext();
@@ -24,6 +26,6 @@ test.describe("makemytrip.com Flight Booking Automation", async ()=>{
         await searchFlightsPageObj.bookCheapestFlight();
         let flightDetailsPageObj=new FlightDetailsPage(page);
         await flightDetailsPageObj.validateFair();
-        await flightDetailsPageObj.validateCoupon("ABCD", "EMTNCF");
+        await flightDetailsPageObj.validateCoupon(invalidCouponCode, validCouponCode);
     });
 });
